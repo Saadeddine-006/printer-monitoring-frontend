@@ -34,9 +34,9 @@ const EditUserModal = ({ user, onClose, currentUser }) => {
 
             console.log("EDIT_MODAL: Sending update data for user ID", user.id, ":", updatedUserData);
 
-            const response = await updateUser(user.id, updatedUserData); // Capture the response
+            const response = await updateUser(user.id, updatedUserData);
             setSuccess(true);
-            console.log("EDIT_MODAL: User updated successfully! API Response:", response); // Log the full API response
+            console.log("EDIT_MODAL: User updated successfully! API Response:", response);
 
             setTimeout(() => {
                 onClose();
@@ -50,12 +50,13 @@ const EditUserModal = ({ user, onClose, currentUser }) => {
     };
 
     return (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full relative">
-                <h2 className="text-2xl font-bold mb-6 text-gray-800">Edit User: {user.fullName}</h2>
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-60 flex items-center justify-center z-50 p-4 animate-fade-in">
+            <div className="bg-white rounded-xl shadow-2xl p-6 sm:p-8 max-w-md w-full relative transform scale-95 animate-scale-in">
+                <h2 className="text-2xl font-bold mb-6 text-gray-900">Edit User: <span className="text-indigo-600">{user.fullName}</span></h2>
+
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl leading-none"
+                    className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl leading-none focus:outline-none focus:ring-2 focus:ring-gray-300 rounded-full"
                     aria-label="Close modal"
                 >
                     &times;
@@ -80,7 +81,7 @@ const EditUserModal = ({ user, onClose, currentUser }) => {
                             id="fullName"
                             value={fullName}
                             onChange={(e) => setFullName(e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                            className="w-full px-4 py-2.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-800"
                             required
                         />
                     </div>
@@ -91,7 +92,7 @@ const EditUserModal = ({ user, onClose, currentUser }) => {
                             id="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                            className="w-full px-4 py-2.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-800"
                             required
                         />
                     </div>
@@ -102,12 +103,11 @@ const EditUserModal = ({ user, onClose, currentUser }) => {
                             value={role}
                             onChange={(e) => setRole(e.target.value)}
                             disabled={isSelfEdit}
-                            className={`w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${isSelfEdit ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                            className={`w-full px-4 py-2.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-800 ${isSelfEdit ? 'bg-gray-100 cursor-not-allowed' : ''}`}
                             required
                         >
-                            <option value="USER">USER</option>
                             <option value="ADMIN">ADMIN</option>
-                            <option value="TECHNICIEN">TECHNICIEN</option>
+                            <option value="TECHNICIAN">TECHNICIAN</option> {/* CORRECTED from TECHNICIEN */}
                             <option value="VIEWER">VIEWER</option>
                         </select>
                         {isSelfEdit && (
@@ -119,14 +119,14 @@ const EditUserModal = ({ user, onClose, currentUser }) => {
                         <button
                             type="button"
                             onClick={onClose}
-                            className="px-5 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition duration-200"
+                            className="px-5 py-2.5 bg-gray-300 text-gray-800 rounded-lg shadow-sm hover:bg-gray-400 transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                             disabled={loading}
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
-                            className="px-5 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-200"
+                            className="px-5 py-2.5 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             disabled={loading}
                         >
                             {loading ? 'Updating...' : 'Save Changes'}
