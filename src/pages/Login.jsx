@@ -80,6 +80,16 @@ const Login = () => {
                     >
                         Login
                     </button>
+                    {/* New: Forgot Password Link */}
+                    <div className="text-center mt-4">
+                        <button
+                            type="button"
+                            onClick={() => navigate('/forgot-password')}
+                            className="text-sm text-indigo-600 hover:text-indigo-800 font-semibold transition duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-md p-1"
+                        >
+                            Forgot password?
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
